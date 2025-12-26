@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+  <section style="margin: 4em auto; max-width: 600px;">
+    <form id="form" method="POST" action="/" enctype="multipart/form-data">
+      <h1 class="text-center">Temporary File Share</h1>
+      <div class="upload-zone" id="dropzone" onclick="document.getElementById('file').click()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+        <h3 id="file_label">Click to upload or drag files here</h3>
+        <input type="file" name="file" id="file" class="is-hidden" multiple>
+      </div>
+
+      <select id="expiration" name="expiration" style="margin-top: 2em;">
+        <optgroup label="Expiration">
+          {% for allowed_minutes, human_readable in allowed_expiration_times %}
+          <option value="{{ allowed_minutes }}">Expire in {{ human_readable }}</option>
+          {% endfor %}
+        </optgroup>
+      </select>
+    </form>
+  </section>
+</main>
+
+<script>
+class Fshare {
+  constructor() {
+    this.file_input = document.getElementById("file");
+    this.file_label = document.getElementById("file_label");
+    this.form = document.getElementById("form");
+    this.dropzone = document.getElementById("dropzone");
+  }
+
+  startUpload(e) {
+    e.preventDefault();
+
+    if (e.dataTransfer && e.dataTransfer.files) {
+      this.file_input.files = e.dataTransfer.files;
+    }
+
+    this.file_label.innerHTML = '';
+    for (const file of this.file_input.files) {
+      this.file_label.innerHTML += `${file.name} (${this.fileSize(file.size)})<br>`;
+    }
+
+    document.getElementById("form").submit();
+  }
+
+  registerEvents() {
+    this.dropzone.addEventListener("change", (e) => this.startUpload(e));
+    this.dropzone.addEventListener("drop", (e) => this.startUpload(e));
+    this.dropzone.addEventListener("dragover", (e) => e.preventDefault());
+  }
+
+  fileSize(number) {
+    if (number < 1e3) {
+      return `${number} bytes`;
+    } else if (number >= 1e3 && number < 1e6) {
+      return `${(number / 1e3).toFixed(1)} KB`;
+    } else {
+      return `${(number / 1e6).toFixed(1)} MB`;
+    }
+  }
+}
+new Fshare().registerEvents()
+</script>
+{% endblock %}

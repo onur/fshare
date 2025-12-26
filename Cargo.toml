@@ -1,0 +1,29 @@
+[package]
+name = "fshare"
+version = "0.1.0"
+edition = "2024"
+description = "S3 compatible temporary file share"
+license = "MIT"
+repository = "https://github.com/onur/fshare"
+
+[dependencies]
+aws-config = "1.8"
+aws-sdk-s3 = "1.118"
+axum = { version = "0.8", features = ["multipart"] }
+bytes = "1.11.0"
+chrono = { version = "0.4", default-features = false, features = ["now"] }
+config = { version = "0.15", default-features = false }
+humantime = "2.3"
+minijinja = { version = "2.14", default-features = false, features = ["multi_template", "serde"] }
+rand = "0.9"
+serde = { version = "1", features = ["derive"] }
+thiserror = "2.0"
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+
+[profile.release]
+strip = true
+lto = true
+opt-level = 3
+debug = false
+codegen-units = 1

@@ -1,0 +1,12 @@
+services:
+  rustfs:
+    image: rustfs/rustfs:1.0.0-alpha.76
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      RUSTFS_ACCESS_KEY: admin
+      RUSTFS_SECRET_KEY: 12345678
+      RUSTFS_CONSOLE_ENABLE: true
+    volumes:
+      - /tmp/data:/data

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}fshare - Simple File Sharing{% endblock %}</title>
+<link rel="stylesheet" href="https://unpkg.com/chota@0.9.2/dist/chota.min.css">
+<style>
+  :root {
+    --color-primary: #5e81ac;
+  }
+
+  body {
+    background-color: #eceff4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The Upload Box */
+  .upload-zone {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 8rem 2rem;
+    text-align: center;
+    background: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .upload-zone:hover {
+    border-color: var(--color-primary);
+    background-color: #e5e9f0;
+  }
+
+  .upload-zone svg {
+    width: 48px;
+    height: 48px;
+    color: #aaa;
+    margin-bottom: 1rem;
+  }
+
+  .file-icon {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+
+  .tabs a, .tabs a:hover {
+    border: none;
+  }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <div class="nav-left">
+      <a class="brand text-primary" href="/"><b>fshare</b></a>
+    </div>
+    <div class="nav-right">
+      <div class="tabs">
+        <a href="https://github.com/onur/fshare">GitHub</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

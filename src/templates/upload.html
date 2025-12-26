@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+function copyToClipboard(e, link) {
+  navigator.clipboard.writeText(link).then(() => e.innerHTML = "Copied!");
+}
+</script>
+<main class="container">
+  <section style="margin: 4em auto;">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <header>
+            <h4>Uploads</h4>
+          </header>
+
+          <table class="striped">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>URL</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for u in uploads %}
+              <tr>
+                <td>{{ u.upload.file_name }}</td>
+                <td><a href="{{ u.url }}">{{ u.url }}</a></td>
+                <td class="text-right"><button class="button small outline" onclick="copyToClipboard(this, '{{ u.url }}')">Copy Link</button></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
