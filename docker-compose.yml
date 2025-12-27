@@ -1,4 +1,14 @@
 services:
+  fshare:
+    image: ghcr.io/onur/fshare:latest
+    ports:
+      - 8080:8080
+    environment:
+    - AWS_BUCKET=test
+    - AWS_REGION=us-east-1
+    - AWS_ACCESS_KEY_ID=admin
+    - AWS_SECRET_ACCESS_KEY=12345678
+    - AWS_ENDPOINT_URL=http://rustfs:9000/
   rustfs:
     image: rustfs/rustfs:1.0.0-alpha.76
     ports:
@@ -9,4 +19,7 @@ services:
       RUSTFS_SECRET_KEY: 12345678
       RUSTFS_CONSOLE_ENABLE: true
     volumes:
-      - /tmp/data:/data
+      - rustfs:/data
+
+volumes:
+  rustfs:
