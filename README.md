@@ -6,12 +6,13 @@ S3 compatible, stateless temporary file share service.
 
 ```sh
 docker run -d \
-    -n fshare \
+    --name fshare \
     -e AWS_REGION=us-east-1 \
     -e AWS_ACCESS_KEY_ID=admin \
     -e AWS_SECRET_ACCESS_KEY=12345678 \
     -e AWS_BUCKET=test \
-    -p 8080:8080
+    -p 8080:8080 \
+    ghcr.io/onur/fshare:latest
 ```
 
 Or you can use it with local running S3 object storage with rustfs, from provided [docker-compose.yml](docker-compose.yml) file:
