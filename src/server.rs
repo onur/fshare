@@ -109,10 +109,6 @@ fn index(store: &Store) -> Result<Html<String>> {
 }
 
 fn get_origin(headers: &HeaderMap) -> String {
-    if let Some(origin) = headers.get("origin").and_then(|h| h.to_str().ok()) {
-        return origin.to_string();
-    }
-
     let proto = headers
         .get("x-forwarded-proto")
         .and_then(|h| h.to_str().ok())
@@ -120,7 +116,8 @@ fn get_origin(headers: &HeaderMap) -> String {
         .to_string();
 
     let host = headers
-        .get("host")
+        .get("x-forwarded-host")
+        .or_else(|| headers.get("host"))
         .and_then(|h| h.to_str().ok())
         .unwrap_or("localhost")
         .to_string();
