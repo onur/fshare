@@ -1,6 +1,6 @@
 use axum::{
     body::Body,
-    extract::multipart::MultipartError,
+    extract::multipart::{MultipartError, MultipartRejection},
     http::StatusCode,
     response::{IntoResponse, Response},
 };
@@ -20,6 +20,9 @@ pub enum Error {
 
     #[error(transparent)]
     MultiPart(#[from] MultipartError),
+
+    #[error(transparent)]
+    MultipartRejection(#[from] MultipartRejection),
 
     #[error(transparent)]
     Minijinja(#[from] minijinja::Error),

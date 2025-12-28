@@ -34,7 +34,7 @@ async fn upload(State(store): State<Arc<Store>>, request: Request) -> Result<imp
         .and_then(|h| h.to_str().ok())
         .is_some_and(|ua| !ua.to_lowercase().contains("mozilla"));
 
-    let mut multipart = Multipart::from_request(request, &store).await.unwrap();
+    let mut multipart = Multipart::from_request(request, &store).await?;
 
     while let Some(field) = multipart.next_field().await? {
         match field.name() {
