@@ -24,4 +24,15 @@ docker compose up -d
 
 Visit http://localhost:9001 to create a bucket. Then you can access fshare from http://localhost:9000.
 
-**You need to create a lifecycle policy to remove old files.**
+**You need to create a lifecycle policy for your bucket to remove expired files.**
+
+## Options
+
+fshare is using official AWS SDK for Rust. You can use
+[environment variables](https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html)
+to configure AWS SDK.
+
+* `MAX_UPLOAD_SIZE`: Maximum upload size in megabytes. Default: `10`
+* `ALLOWED_DURATIONS`: Comma separated list of durations in minutes. Default: `30,60,360,1440,10080`
+* `ID_LENGTH`: Length of the upload ID's. Default: `8`.
+* `SOCKET_ADDR`: Socket address to bind server. Default: `0.0.0.0:8080`
