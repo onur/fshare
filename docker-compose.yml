@@ -4,11 +4,11 @@ services:
     ports:
       - 8080:8080
     environment:
-    - AWS_BUCKET=test
-    - AWS_REGION=us-east-1
-    - AWS_ACCESS_KEY_ID=admin
-    - AWS_SECRET_ACCESS_KEY=12345678
-    - AWS_ENDPOINT_URL=http://rustfs:9000/
+      - AWS_BUCKET=test
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=12345678
+      - AWS_ENDPOINT_URL=http://rustfs:9000/
   rustfs:
     image: rustfs/rustfs:1.0.0-alpha.76
     ports:
