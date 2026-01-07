@@ -41,7 +41,7 @@ impl Object {
         }
 
         if let Some(content_type) = self.0.content_type()
-            && !["text/plain", "image/", "video/mp4"]
+            && !["text/", "image/", "video/mp4"]
                 .iter()
                 .any(|t| content_type.contains(t))
             && let Some(filename) = self
